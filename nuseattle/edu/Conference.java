@@ -37,6 +37,10 @@ public class Conference {
             System.out.println ("Total skipped: " + skippedCount);
             System.out.println ("Total duplcate: " + dupCount);
             System.out.println ("Total written: " + writeCount);
+            System.out.println(" ===============TITLES======================") ;
+            for ( int i= 0; i < titlesIndex ; i++ ) {
+                System.out.println (i + ". " + titles[i]);
+            }
             input.close();
             output.close();
         } catch (IOException ex) {
@@ -58,19 +62,21 @@ public class Conference {
         // if exists, return true
         // If doesn't exist - store in titles and return false
 
-        System.out.println("checking for duplicates" + titlesIndex);
+        //System.out.println("checking for duplicates" + titlesIndex);
         int i =0;
+        String title = newTitle.toLowerCase();
+        System.out.println (title + "Lower case????");
         while (i < titlesIndex) {
-            if (titles[i].equals(newTitle)) {
+            if (titles[i].equals(title)) {
                 System.out.println("duplicate found");
                 dupCount++;
                 return true;
             }
             i++;
         }
-        // not a dupliccate, so store
-        System.out.println (newTitle + "-----NOT DUPLICATE");
-        titles[titlesIndex] = newTitle;
+        // not a duplicate, so store
+        System.out.println (title + "-----NOT DUPLICATE");
+        titles[titlesIndex] = title;
         titlesIndex++;
         return false;
     }
@@ -83,7 +89,7 @@ public class Conference {
             //  System.out.println("COPYING LINE");
             line  = br.readLine();
         }
-        skippedCount++;
+
     }
 
     // =============================================================================
@@ -93,8 +99,7 @@ public class Conference {
     private boolean isRelevant (String title) {
         Scanner in = new Scanner(System.in);
 
-        System.out.println ("y" +
-                "Is this abstract relevant (Y/N) =====)"+ title + "====");
+        System.out.println ("Is this abstract relevant (Y/N) =====)"+ title + "====");
         String response = in.nextLine();
         response.toLowerCase();
         while(  (response.charAt(0) != 'y')  && ( response.charAt(0) != 'n') ) {
@@ -129,12 +134,11 @@ public class Conference {
             total++;
             int i =0;
             while (title.charAt(i) != ' ') {
-                // System.out.println("looking for a space");
+                // skip over number at start of abstract by finding first space
                 i++;
             }
             System.out.println();
             //store title stripped of number so we can check for duplicates
-            // titles[titlesIndex] = title.substring(i+1);
             if ( checkDuplicateAbstract (title.substring(i+1)) ) {
                 skipAbstract (br);
             } else {
@@ -150,7 +154,11 @@ public class Conference {
                         line  = br.readLine();
                     }
                     bw.newLine();
-                }}
+                }else {
+                    skippedCount++;
+                    skipAbstract (br);
+                }
+            }
 
 
         }else {
