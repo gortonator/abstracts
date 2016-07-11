@@ -1,9 +1,6 @@
 package nuseattle.edu;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -16,14 +13,33 @@ import java.util.Scanner;
 public class Main {
 
     final static String IN_FILE_NAME = "C:\\abstracts\\ECSA2007.txt";
+    final static String PATH = "C:\\abstracts\\";
 
     final static String OUTPUT_FILE_NAME = "C:\\abstracts\\ECSA2007new.txt";
    // final static Charset ENCODING = StandardCharsets.UTF_8;
     final static Charset ENCODING = StandardCharsets.US_ASCII;
 
     public static void main(String[] args) {
-         Conference test = new Conference(IN_FILE_NAME, OUTPUT_FILE_NAME);
-         test.processAbstracts();
+        FilenameFilter filter  = new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".txt");
+            }
+        } ;
+        File folder = new File (PATH) ;
+
+        File[] inputFileList = folder.listFiles(filter) ;
+
+        for (File f : inputFileList ) {
+            String inputFile = PATH + f.getName();
+            String outFile = PATH +  "new" + f.getName();
+            System.out.println(inputFile);
+            System.out.println(outFile);
+            //Conference test = new Conference( inputFile, outFile);
+            //test.processAbstracts();
+        }
+
+
 
      /*   try {
          //   List<String> lines =
