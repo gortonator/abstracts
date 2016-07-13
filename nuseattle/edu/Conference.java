@@ -65,7 +65,7 @@ public class Conference {
         //System.out.println("checking for duplicates" + titlesIndex);
         int i =0;
         String title = newTitle.toLowerCase();
-        System.out.println (title + "Lower case????");
+        // System.out.println (title + "Lower case????");
         while (i < titlesIndex) {
             if (titles[i].equals(title)) {
                 System.out.println("duplicate found");
@@ -75,7 +75,7 @@ public class Conference {
             i++;
         }
         // not a duplicate, so store
-        System.out.println (title + "-----NOT DUPLICATE");
+        //System.out.println (title + "-----NOT DUPLICATE");
         titles[titlesIndex] = title;
         titlesIndex++;
         return false;
@@ -101,10 +101,19 @@ public class Conference {
 
         System.out.println ("Is this abstract relevant (Y/N) =====)"+ title + "====");
         String response = in.nextLine();
+        while (response.length() == 0) {
+            System.out.println ("Is this abstract relevant (Y/N) =====)"+ title + "====");
+            response = in.nextLine();
+        }
         response.toLowerCase();
+
         while(  (response.charAt(0) != 'y')  && ( response.charAt(0) != 'n') ) {
             System.out.println ("Incorrect input: Is this abstract relevant (Y/N) =====)"+ title + "====");
             response = in.nextLine();
+            while (response.length() == 0) {
+                System.out.println ("Is this abstract relevant (Y/N) =====)"+ title + "====");
+                response = in.nextLine();
+            }
             response.toLowerCase();
         }
 
@@ -123,14 +132,14 @@ public class Conference {
         String line = br.readLine();
         String title = line;
         while( ( (line != null) && (line.trim().isEmpty()) ) ){
-            System.out.println("EMPTY LINE DUDE");
+            // System.out.println("EMPTY LINE DUDE");
             line  = br.readLine();
             title = line;
         }
 
         if (title != null) {
             // process it
-            System.out.println("TITLE FOUND");
+            // System.out.println("TITLE FOUND");
             total++;
             int i =0;
             while (title.charAt(i) != ' ') {

@@ -35,8 +35,8 @@ public class Main {
             String outFile = PATH +  "new" + f.getName();
             System.out.println(inputFile);
             System.out.println(outFile);
-            //Conference test = new Conference( inputFile, outFile);
-            //test.processAbstracts();
+            Conference test = new Conference( inputFile, outFile);
+            test.processAbstracts();
         }
 
 
